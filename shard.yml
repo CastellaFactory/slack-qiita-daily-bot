@@ -1,0 +1,12 @@
+name: slack-qiita-daily-bot2
+version: 0.1.0
+
+authors:
+  - CastellaFactory <castellafactory@gmail.com>
+
+dependencies:
+  slack-incoming-webhooks:
+    github: CastellaFactory/slack-incoming-webhooks
+    branch: master
+
+license: MIT
