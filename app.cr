@@ -8,7 +8,7 @@ qiita_url = "http://qiita.com/"
 resp = HTTP::Client.get(json_url)
 result = Array(Slack::Qiita::Daily::Bot::PostData).from_json(resp.body)
 
-slack = Slack::Incoming::Webhooks::Hook.new(
+slack = Slack::Incoming::Webhooks::Connection.new(
   ENV["WEBHOOK_URL"],
   username: "QiitaDaily (from Qaleidospace)")
 
