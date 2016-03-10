@@ -1,4 +1,4 @@
-require "../src/slack-qiita-daily-bot2"
+require "../src/slack-qiita-daily-bot"
 require "slack-incoming-webhooks"
 
 # from QaleidoSpace repo(see. http://qiita.com/koher/items/b5c7c949aa62c60d5457)
@@ -6,7 +6,7 @@ json_url = "https://raw.githubusercontent.com/qaleidospace/qaleidospace.github.i
 qiita_url = "http://qiita.com/"
 
 resp = HTTP::Client.get(json_url)
-result = Array(Slack::Qiita::Daily::Bot2::PostData).from_json(resp.body)
+result = Array(Slack::Qiita::Daily::Bot::PostData).from_json(resp.body)
 
 slack = Slack::Incoming::Webhooks::Hook.new(
   ENV["WEBHOOK_URL"],

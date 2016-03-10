@@ -1,9 +1,9 @@
-require "./slack-qiita-daily-bot2/*"
+require "./slack-qiita-daily-bot/*"
 
 require "json"
 require "http/client"
 
-module Slack::Qiita::Daily::Bot2
+module Slack::Qiita::Daily::Bot
   class PostData
     JSON.mapping({
       user:       Hash(String, String),

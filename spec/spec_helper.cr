@@ -1,2 +1,2 @@
 require "spec"
-require "../src/slack-qiita-daily-bot2"
+require "../src/slack-qiita-daily-bot"
