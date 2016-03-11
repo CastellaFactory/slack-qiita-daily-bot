@@ -2,5 +2,5 @@ version: 1.0
 shards:
   slack-incoming-webhooks:
     github: CastellaFactory/slack-incoming-webhooks
-    commit: f44f9bca41b3cb21bda6f0affe7963554df57e42
+    commit: dc6a4a386ea8040e9055ae15d9835951fdc5dbc7
 
