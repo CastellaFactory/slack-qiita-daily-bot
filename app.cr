@@ -23,15 +23,14 @@ result.each do |data|
     title_link: data.url
   )
   # Tag
-  tag_arr = [] of String
-  data.tags.each do |hash|
-    tag_arr.push hash.map { |k, v| v }.join
-  end
+  # data.tags [{"name" => "tag1"}, {"name" => "tag2"}, ...]
+  tag_arr = data.tags.map { |hash| hash.first.at(1) }
   field = Slack::Incoming::Webhooks::AttachmentField.new(
     "タグ",
     tag_arr.join("  ")
   )
   attachment.add_field(field)
+
   attachments.push(attachment)
 end
 
