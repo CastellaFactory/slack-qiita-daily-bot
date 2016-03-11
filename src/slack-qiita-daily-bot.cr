@@ -3,7 +3,7 @@ require "./slack-qiita-daily-bot/*"
 require "json"
 require "http/client"
 
-module Slack::Qiita::Daily::Bot
+module QiitaDailyBot
   class PostData
     JSON.mapping({
       user:       Hash(String, String),

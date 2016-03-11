@@ -6,16 +6,16 @@ json_url = "https://raw.githubusercontent.com/qaleidospace/qaleidospace.github.i
 qiita_url = "http://qiita.com/"
 
 resp = HTTP::Client.get(json_url)
-result = Array(Slack::Qiita::Daily::Bot::PostData).from_json(resp.body)
+result = Array(QiitaDailyBot::PostData).from_json(resp.body)
 
-slack = Slack::Incoming::Webhooks::Connection.new(
+slack = Slack::Incoming::Webhooks.new(
   ENV["WEBHOOK_URL"],
   username: "QiitaDaily (from Qaleidospace)")
 
-attachments = Array(Slack::Incoming::Webhooks::Attachment).new
+attachments = Array(Slack::Incoming::Attachment).new
 
 result.each do |data|
-  attachment = Slack::Incoming::Webhooks::Attachment.new(
+  attachment = Slack::Incoming::Attachment.new(
     author_name: data.user["id"],
     author_icon: data.user["profile_image_url"],
     author_link: "#{qiita_url}#{data.user["id"]}",
@@ -25,7 +25,7 @@ result.each do |data|
   # Tag
   # data.tags [{"name" => "tag1"}, {"name" => "tag2"}, ...]
   tag_arr = data.tags.map { |hash| hash.first.at(1) }
-  field = Slack::Incoming::Webhooks::AttachmentField.new(
+  field = Slack::Incoming::AttachmentField.new(
     "タグ",
     tag_arr.join("  ")
   )

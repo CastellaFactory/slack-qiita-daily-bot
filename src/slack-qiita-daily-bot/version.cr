@@ -1,3 +1,3 @@
-module Slack::Qiita::Daily::Bot
+module QiitaDailyBot
   VERSION = "0.1.0"
 end

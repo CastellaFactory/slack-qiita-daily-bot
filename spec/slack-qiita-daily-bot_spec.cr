@@ -1,10 +1,15 @@
 require "./spec_helper"
 
-describe Slack::Qiita::Daily::Bot do
-  it "Get JSON" do
-    resp = HTTP::Client.get("https://raw.githubusercontent.com/qaleidospace/qaleidospace.github.io/master/_data/daily.json")
-    result = Array(Slack::Qiita::Daily::Bot::PostData).from_json(resp.body)
+describe QiitaDailyBot do
+  json_url = "https://raw.githubusercontent.com/qaleidospace/qaleidospace.github.io/master/_data/daily.json"
 
+  it "has a version number" do
+    QiitaDailyBot::VERSION.should_not be_nil
+  end
+
+  it "get ranking data" do
+    resp = HTTP::Client.get(json_url)
+    result = Array(QiitaDailyBot::PostData).from_json(resp.body)
     (result.size > 0).should be_true
   end
 end
