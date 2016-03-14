@@ -25,7 +25,6 @@ result.each do |data|
   # Tag
   # data.tags [{"name" => "tag1"}, {"name" => "tag2"}, ...]
   tag_arr = data.tags.map(&.first.at(1))
-  # tag_arr = data.tags.map { |hash| hash.first.at(1) }
   field = Slack::AttachmentField.new(
     "タグ",
     tag_arr.join("  ")
