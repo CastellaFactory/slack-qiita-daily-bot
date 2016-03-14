@@ -8,14 +8,14 @@ qiita_url = "http://qiita.com/"
 resp = HTTP::Client.get(json_url)
 result = Array(QiitaDailyBot::PostData).from_json(resp.body)
 
-slack = Slack::Incoming::Webhooks.new(
+slack = Slack::IncomingWebhooks.new(
   ENV["WEBHOOK_URL"],
   username: "QiitaDaily (from Qaleidospace)")
 
-attachments = Array(Slack::Incoming::Attachment).new
+attachments = Array(Slack::Attachment).new
 
 result.each do |data|
-  attachment = Slack::Incoming::Attachment.new(
+  attachment = Slack::Attachment.new(
     author_name: data.user["id"],
     author_icon: data.user["profile_image_url"],
     author_link: "#{qiita_url}#{data.user["id"]}",
@@ -24,8 +24,9 @@ result.each do |data|
   )
   # Tag
   # data.tags [{"name" => "tag1"}, {"name" => "tag2"}, ...]
-  tag_arr = data.tags.map { |hash| hash.first.at(1) }
-  field = Slack::Incoming::AttachmentField.new(
+  tag_arr = data.tags.map(&.first.at(1))
+  # tag_arr = data.tags.map { |hash| hash.first.at(1) }
+  field = Slack::AttachmentField.new(
     "タグ",
     tag_arr.join("  ")
   )
